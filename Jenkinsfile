@@ -4,13 +4,13 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/zdmooc/devfile-sample-python-basic.git'
+                git branch: 'main', url: 'https://github.com/zdmooc/devfile-sample-python-basic.git'
             }
         }
         stage('Build') {
             steps {
                 script {
-                    // Commands to build your application, for example:
+                    // Commande pour lancer la build de votre application
                     sh 'oc start-build python-app --from-dir=. --follow -n test'
                 }
             }
@@ -18,7 +18,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    // Commands to deploy your application, for example:
+                    // Commande pour déployer votre application
                     sh 'oc rollout latest dc/python-app -n test'
                 }
             }
